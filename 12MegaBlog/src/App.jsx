@@ -6,6 +6,7 @@ import authService from './APPwrite/auth'
 import { login , logout } from './Store/authSlice'
 import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
+import { Outlet } from 'react-router-dom'
 
 function App() {
 
@@ -32,7 +33,7 @@ function App() {
 
         <Header />
         <main>
-          {/* <Outlet /> */}
+          <Outlet />
         </main>
         <Footer />
 

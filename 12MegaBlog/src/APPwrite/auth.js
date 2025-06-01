@@ -15,28 +15,43 @@ export class AuthService{
 
     async createAccount({email , password , name}){
         try{
+            console.log(email , password , name)
             const userAccount = await this.account.create(ID.unique() , email , password , name);
+            console.log(userAccount)
             if(userAccount){
-                return this.login({email , password})
+                console.log("Inside if")
+                return await this.login({email , password})
             }else{
                 return userAccount;
             }
         }catch(e){
+            console.log(e.message)
             throw e;
         }
     }
 
     async login({email , password}){
         try{
-            return await this.account.createEmailPasswordSession(email , password)
+            console.log("Login" , email , password)
+            const loginsession = await this.account.createEmailPasswordSession(
+                email,
+                password
+            )
+
+            console.log(loginsession)
+
+            return loginsession;
         }catch(e){
+            console.log("here")
             throw e;
         }
     }
 
     async getCurrentUser(){
         try{
-            return await this.account.get()
+            const session = await this.account.get();
+            console.log(session)
+            return session;
         }catch(e){
             // throw e;
             console.log("Appwrite Login Error : " , e)
